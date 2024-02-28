@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="17150" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES" customObjectInstantitationMethod="direct">
+<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="22505" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES" customObjectInstantitationMethod="direct">
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="17150"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="22505"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <objects>
@@ -11,9 +11,15 @@
             </connections>
         </customObject>
         <customObject id="-1" userLabel="First Responder" customClass="FirstResponder"/>
-        <customObject id="-3" userLabel="Application"/>
-        <customObject id="Voe-Tx-rLC" customClass="AppDelegate" customModuleProvider="target">
+        <customObject id="-3" userLabel="Application" customClass="NSObject"/>
+        <customObject id="VpU-cX-ysq" customClass="MovieOptionViewController" customModule="MovieClient" customModuleProvider="target"/>
+        <customObject id="Ju7-zT-Xmh" customClass="NetworkOptionViewController" customModule="MovieClient" customModuleProvider="target"/>
+        <customObject id="Voe-Tx-rLC" customClass="AppDelegate" customModule="MovieClient" customModuleProvider="target">
             <connections>
+                <outlet property="movieHolder" destination="oTI-7L-Sbs" id="61l-HX-Hjf"/>
+                <outlet property="movieOptions" destination="VpU-cX-ysq" id="5Ua-mq-FLd"/>
+                <outlet property="networkHolder" destination="3H8-Fe-PCp" id="b0W-zG-pQI"/>
+                <outlet property="networkOptions" destination="Ju7-zT-Xmh" id="aqK-fQ-wev"/>
                 <outlet property="window" destination="QvC-M9-y7g" id="gIp-Ho-8D9"/>
             </connections>
         </customObject>
@@ -678,21 +684,75 @@
                     </menu>
                 </menuItem>
             </items>
-            <point key="canvasLocation" x="200" y="121"/>
+            <point key="canvasLocation" x="-438" y="-235"/>
         </menu>
         <window title="MovieClient" allowsToolTipsWhenApplicationIsInactive="NO" autorecalculatesKeyViewLoop="NO" releasedWhenClosed="NO" animationBehavior="default" id="QvC-M9-y7g">
             <windowStyleMask key="styleMask" titled="YES" closable="YES" miniaturizable="YES" resizable="YES"/>
             <windowPositionMask key="initialPositionMask" leftStrut="YES" rightStrut="YES" topStrut="YES" bottomStrut="YES"/>
-            <rect key="contentRect" x="335" y="390" width="480" height="360"/>
-            <rect key="screenRect" x="0.0" y="0.0" width="2560" height="1415"/>
-            <view key="contentView" id="EiT-Mj-1SZ">
-                <rect key="frame" x="0.0" y="0.0" width="480" height="360"/>
+            <rect key="contentRect" x="335" y="390" width="936" height="497"/>
+            <rect key="screenRect" x="0.0" y="0.0" width="5120" height="1415"/>
+            <view key="contentView" id="EiT-Mj-1SZ" customClass="MyView" customModule="MovieClient" customModuleProvider="target">
+                <rect key="frame" x="0.0" y="0.0" width="936" height="497"/>
                 <autoresizingMask key="autoresizingMask"/>
+                <subviews>
+                    <customView translatesAutoresizingMaskIntoConstraints="NO" id="3H8-Fe-PCp" customClass="MyView" customModule="MovieClient" customModuleProvider="target">
+                        <rect key="frame" x="0.0" y="219" width="936" height="278"/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="278" id="h0N-g5-i16"/>
+                        </constraints>
+                    </customView>
+                    <customView translatesAutoresizingMaskIntoConstraints="NO" id="oTI-7L-Sbs" customClass="MyView" customModule="MovieClient" customModuleProvider="target">
+                        <rect key="frame" x="0.0" y="74" width="936" height="145"/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="145" id="fcQ-0n-aGr"/>
+                        </constraints>
+                    </customView>
+                    <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="qYN-3k-Nza">
+                        <rect key="frame" x="848" y="13" width="75" height="32"/>
+                        <buttonCell key="cell" type="push" title="Button" bezelStyle="rounded" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="dpb-SF-gl6">
+                            <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
+                            <font key="font" metaFont="system"/>
+                        </buttonCell>
+                        <connections>
+                            <action selector="changeAction:" target="Voe-Tx-rLC" id="7KR-Ov-gqq"/>
+                            <binding destination="Voe-Tx-rLC" name="title" keyPath="mode" id="ZdZ-US-wA2"/>
+                        </connections>
+                    </button>
+                    <textField focusRingType="none" horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="n0i-6x-Ikf">
+                        <rect key="frame" x="18" y="23" width="378" height="16"/>
+                        <constraints>
+                            <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="374" id="QsI-oG-VaB"/>
+                        </constraints>
+                        <textFieldCell key="cell" lineBreakMode="clipping" title="Label" id="Sq5-s1-dV8">
+                            <font key="font" metaFont="system"/>
+                            <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
+                            <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
+                        </textFieldCell>
+                        <connections>
+                            <binding destination="Voe-Tx-rLC" name="value" keyPath="currentState" id="nTd-I2-TNy"/>
+                        </connections>
+                    </textField>
+                </subviews>
+                <constraints>
+                    <constraint firstAttribute="trailing" secondItem="qYN-3k-Nza" secondAttribute="trailing" constant="20" symbolic="YES" id="9iH-hh-cOj"/>
+                    <constraint firstItem="qYN-3k-Nza" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="n0i-6x-Ikf" secondAttribute="trailing" constant="8" symbolic="YES" id="A8S-gj-yc9"/>
+                    <constraint firstAttribute="bottom" secondItem="qYN-3k-Nza" secondAttribute="bottom" constant="20" symbolic="YES" id="IDo-U7-bLX"/>
+                    <constraint firstItem="3H8-Fe-PCp" firstAttribute="top" secondItem="EiT-Mj-1SZ" secondAttribute="top" id="MzS-IC-bpb"/>
+                    <constraint firstItem="oTI-7L-Sbs" firstAttribute="leading" secondItem="EiT-Mj-1SZ" secondAttribute="leading" id="P8V-92-ln8"/>
+                    <constraint firstItem="qYN-3k-Nza" firstAttribute="top" relation="greaterThanOrEqual" secondItem="oTI-7L-Sbs" secondAttribute="bottom" constant="20" symbolic="YES" id="UdC-gf-o3k"/>
+                    <constraint firstAttribute="trailing" secondItem="oTI-7L-Sbs" secondAttribute="trailing" id="hib-1q-xEa"/>
+                    <constraint firstItem="3H8-Fe-PCp" firstAttribute="leading" secondItem="EiT-Mj-1SZ" secondAttribute="leading" id="oRd-XY-KXw"/>
+                    <constraint firstItem="oTI-7L-Sbs" firstAttribute="top" secondItem="3H8-Fe-PCp" secondAttribute="bottom" id="oUB-M6-0x8"/>
+                    <constraint firstItem="n0i-6x-Ikf" firstAttribute="leading" secondItem="EiT-Mj-1SZ" secondAttribute="leading" constant="20" symbolic="YES" id="sfC-Pt-7a2"/>
+                    <constraint firstItem="qYN-3k-Nza" firstAttribute="firstBaseline" secondItem="n0i-6x-Ikf" secondAttribute="firstBaseline" id="ui5-la-NSX"/>
+                    <constraint firstAttribute="trailing" secondItem="3H8-Fe-PCp" secondAttribute="trailing" id="x3n-Tr-cAA"/>
+                </constraints>
             </view>
             <connections>
                 <outlet property="delegate" destination="Voe-Tx-rLC" id="top-28-M4D"/>
             </connections>
-            <point key="canvasLocation" x="200" y="400"/>
+            <point key="canvasLocation" x="146" y="91.5"/>
         </window>
+        <userDefaultsController representsSharedInstance="YES" id="FGF-nf-qJl"/>
     </objects>
 </document>

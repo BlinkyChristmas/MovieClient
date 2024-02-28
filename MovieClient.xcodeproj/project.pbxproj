@@ -10,6 +10,15 @@
 		568234E72B8F8741002F0CE1 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 568234E62B8F8741002F0CE1 /* AppDelegate.swift */; };
 		568234E92B8F8743002F0CE1 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 568234E82B8F8743002F0CE1 /* Assets.xcassets */; };
 		568234EC2B8F8744002F0CE1 /* MainMenu.xib in Resources */ = {isa = PBXBuildFile; fileRef = 568234EA2B8F8744002F0CE1 /* MainMenu.xib */; };
+		568234FA2B8F87B8002F0CE1 /* MyView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 568234F42B8F87B8002F0CE1 /* MyView.swift */; };
+		568234FB2B8F87B8002F0CE1 /* HourMinute.swift in Sources */ = {isa = PBXBuildFile; fileRef = 568234F52B8F87B8002F0CE1 /* HourMinute.swift */; };
+		568234FC2B8F87B8002F0CE1 /* BinaryInteger+extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 568234F72B8F87B8002F0CE1 /* BinaryInteger+extension.swift */; };
+		568234FD2B8F87B8002F0CE1 /* URL+extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 568234F82B8F87B8002F0CE1 /* URL+extension.swift */; };
+		568234FE2B8F87B8002F0CE1 /* Data+extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 568234F92B8F87B8002F0CE1 /* Data+extension.swift */; };
+		568235012B8F87FF002F0CE1 /* NetworkOptionView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 568235002B8F87FF002F0CE1 /* NetworkOptionView.xib */; };
+		568235032B8F8832002F0CE1 /* NetworkOptionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 568235022B8F8832002F0CE1 /* NetworkOptionViewController.swift */; };
+		568235062B8F9C69002F0CE1 /* MovieOptionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 568235052B8F9C69002F0CE1 /* MovieOptionViewController.swift */; };
+		568235082B8F9C98002F0CE1 /* MovieOptionView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 568235072B8F9C98002F0CE1 /* MovieOptionView.xib */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -18,6 +27,15 @@
 		568234E82B8F8743002F0CE1 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		568234EB2B8F8744002F0CE1 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/MainMenu.xib; sourceTree = "<group>"; };
 		568234ED2B8F8744002F0CE1 /* MovieClient.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = MovieClient.entitlements; sourceTree = "<group>"; };
+		568234F42B8F87B8002F0CE1 /* MyView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MyView.swift; sourceTree = "<group>"; };
+		568234F52B8F87B8002F0CE1 /* HourMinute.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HourMinute.swift; sourceTree = "<group>"; };
+		568234F72B8F87B8002F0CE1 /* BinaryInteger+extension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "BinaryInteger+extension.swift"; sourceTree = "<group>"; };
+		568234F82B8F87B8002F0CE1 /* URL+extension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "URL+extension.swift"; sourceTree = "<group>"; };
+		568234F92B8F87B8002F0CE1 /* Data+extension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Data+extension.swift"; sourceTree = "<group>"; };
+		568235002B8F87FF002F0CE1 /* NetworkOptionView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = NetworkOptionView.xib; sourceTree = "<group>"; };
+		568235022B8F8832002F0CE1 /* NetworkOptionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkOptionViewController.swift; sourceTree = "<group>"; };
+		568235052B8F9C69002F0CE1 /* MovieOptionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovieOptionViewController.swift; sourceTree = "<group>"; };
+		568235072B8F9C98002F0CE1 /* MovieOptionView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = MovieOptionView.xib; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -50,12 +68,53 @@
 		568234E52B8F8741002F0CE1 /* MovieClient */ = {
 			isa = PBXGroup;
 			children = (
+				568235042B8F8EF2002F0CE1 /* Player */,
+				568234FF2B8F87DB002F0CE1 /* Network */,
+				568234F62B8F87B8002F0CE1 /* Extension */,
+				568234F32B8F87B8002F0CE1 /* Utility */,
 				568234E62B8F8741002F0CE1 /* AppDelegate.swift */,
 				568234E82B8F8743002F0CE1 /* Assets.xcassets */,
 				568234EA2B8F8744002F0CE1 /* MainMenu.xib */,
 				568234ED2B8F8744002F0CE1 /* MovieClient.entitlements */,
 			);
 			path = MovieClient;
+			sourceTree = "<group>";
+		};
+		568234F32B8F87B8002F0CE1 /* Utility */ = {
+			isa = PBXGroup;
+			children = (
+				568234F42B8F87B8002F0CE1 /* MyView.swift */,
+				568234F52B8F87B8002F0CE1 /* HourMinute.swift */,
+			);
+			path = Utility;
+			sourceTree = "<group>";
+		};
+		568234F62B8F87B8002F0CE1 /* Extension */ = {
+			isa = PBXGroup;
+			children = (
+				568234F72B8F87B8002F0CE1 /* BinaryInteger+extension.swift */,
+				568234F82B8F87B8002F0CE1 /* URL+extension.swift */,
+				568234F92B8F87B8002F0CE1 /* Data+extension.swift */,
+			);
+			path = Extension;
+			sourceTree = "<group>";
+		};
+		568234FF2B8F87DB002F0CE1 /* Network */ = {
+			isa = PBXGroup;
+			children = (
+				568235002B8F87FF002F0CE1 /* NetworkOptionView.xib */,
+				568235022B8F8832002F0CE1 /* NetworkOptionViewController.swift */,
+			);
+			path = Network;
+			sourceTree = "<group>";
+		};
+		568235042B8F8EF2002F0CE1 /* Player */ = {
+			isa = PBXGroup;
+			children = (
+				568235072B8F9C98002F0CE1 /* MovieOptionView.xib */,
+				568235052B8F9C69002F0CE1 /* MovieOptionViewController.swift */,
+			);
+			path = Player;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -87,6 +146,7 @@
 				BuildIndependentTargetsInParallel = 1;
 				LastSwiftUpdateCheck = 1520;
 				LastUpgradeCheck = 1520;
+				ORGANIZATIONNAME = "Chales Kerr";
 				TargetAttributes = {
 					568234E22B8F8741002F0CE1 = {
 						CreatedOnToolsVersion = 15.2;
@@ -116,7 +176,9 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				568235082B8F9C98002F0CE1 /* MovieOptionView.xib in Resources */,
 				568234E92B8F8743002F0CE1 /* Assets.xcassets in Resources */,
+				568235012B8F87FF002F0CE1 /* NetworkOptionView.xib in Resources */,
 				568234EC2B8F8744002F0CE1 /* MainMenu.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -128,7 +190,14 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				568235032B8F8832002F0CE1 /* NetworkOptionViewController.swift in Sources */,
+				568234FB2B8F87B8002F0CE1 /* HourMinute.swift in Sources */,
+				568235062B8F9C69002F0CE1 /* MovieOptionViewController.swift in Sources */,
+				568234FA2B8F87B8002F0CE1 /* MyView.swift in Sources */,
 				568234E72B8F8741002F0CE1 /* AppDelegate.swift in Sources */,
+				568234FC2B8F87B8002F0CE1 /* BinaryInteger+extension.swift in Sources */,
+				568234FD2B8F87B8002F0CE1 /* URL+extension.swift in Sources */,
+				568234FE2B8F87B8002F0CE1 /* Data+extension.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
