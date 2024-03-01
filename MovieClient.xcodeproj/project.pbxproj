@@ -27,6 +27,7 @@
 		568235172B90EE98002F0CE1 /* MediaWindow.xib in Resources */ = {isa = PBXBuildFile; fileRef = 568235162B90EE98002F0CE1 /* MediaWindow.xib */; };
 		568235192B92051A002F0CE1 /* Connection.swift in Sources */ = {isa = PBXBuildFile; fileRef = 568235182B92051A002F0CE1 /* Connection.swift */; };
 		5682351B2B922188002F0CE1 /* Window+extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5682351A2B922188002F0CE1 /* Window+extension.swift */; };
+		5682351E2B924AC9002F0CE1 /* Serial.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5682351D2B924AC9002F0CE1 /* Serial.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -52,6 +53,7 @@
 		568235162B90EE98002F0CE1 /* MediaWindow.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = MediaWindow.xib; sourceTree = "<group>"; };
 		568235182B92051A002F0CE1 /* Connection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Connection.swift; sourceTree = "<group>"; };
 		5682351A2B922188002F0CE1 /* Window+extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Window+extension.swift"; sourceTree = "<group>"; };
+		5682351D2B924AC9002F0CE1 /* Serial.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Serial.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -87,6 +89,7 @@
 		568234E52B8F8741002F0CE1 /* MovieClient */ = {
 			isa = PBXGroup;
 			children = (
+				5682351C2B9249AC002F0CE1 /* Projector */,
 				568235042B8F8EF2002F0CE1 /* Player */,
 				568234FF2B8F87DB002F0CE1 /* Network */,
 				568234F62B8F87B8002F0CE1 /* Extension */,
@@ -149,6 +152,14 @@
 				5682350C2B8FB309002F0CE1 /* Network.framework */,
 			);
 			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		5682351C2B9249AC002F0CE1 /* Projector */ = {
+			isa = PBXGroup;
+			children = (
+				5682351D2B924AC9002F0CE1 /* Serial.swift */,
+			);
+			path = Projector;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -238,6 +249,7 @@
 				568234FD2B8F87B8002F0CE1 /* URL+extension.swift in Sources */,
 				568235132B90B31D002F0CE1 /* MediaPlayer.swift in Sources */,
 				568234FE2B8F87B8002F0CE1 /* Data+extension.swift in Sources */,
+				5682351E2B924AC9002F0CE1 /* Serial.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

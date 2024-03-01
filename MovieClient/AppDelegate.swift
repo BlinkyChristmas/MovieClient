@@ -81,6 +81,11 @@ class AppDelegate: NSObject, NSApplicationDelegate {
     }
     // ============================================================================================
     func applicationDidFinishLaunching(_ aNotification: Notification) {
+        /*
+        for entry in serialDevices() {
+            Swift.print("Device: \(entry)")
+        }
+        */
         networkOptions.loadFromPreference()
         networkOptions.view.frame = self.networkHolder.bounds
         self.networkHolder.addSubview(networkOptions.view)
