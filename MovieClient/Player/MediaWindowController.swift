@@ -26,6 +26,8 @@ class MediaWindowController : NSWindowController {
                 self.window?.toggleFullScreen(nil)
             }
             self.window?.close()
+            mediaPlayer.clear()
+            
         }
     }
     

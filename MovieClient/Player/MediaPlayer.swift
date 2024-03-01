@@ -46,4 +46,10 @@ class MediaPlayer : NSObject {
     func stop() {
         player.pause()
     }
+    func clear() {
+        player.pause()
+        let asset = AVAsset()
+        let item = AVPlayerItem(asset: asset)
+        player.replaceCurrentItem(with: item)
+    }
 }
