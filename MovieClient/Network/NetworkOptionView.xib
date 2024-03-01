@@ -38,8 +38,8 @@
                                     <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
                                 </textFieldCell>
                                 <connections>
-                                    <binding destination="-2" name="enabled" keyPath="isEnabled" id="9WM-dW-xoX"/>
                                     <binding destination="-2" name="value" keyPath="handle" id="kMk-iR-Eny"/>
+                                    <binding destination="-2" name="enabled" keyPath="isEnabled" id="9WM-dW-xoX"/>
                                 </connections>
                             </textField>
                             <box title="Server Settings" translatesAutoresizingMaskIntoConstraints="NO" id="cMD-Ne-FeO">
@@ -143,8 +143,8 @@
                                                 <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
                                             </textFieldCell>
                                             <connections>
-                                                <binding destination="-2" name="enabled" keyPath="isEnabled" id="kGz-sm-kTC"/>
                                                 <binding destination="-2" name="value" keyPath="connectTime.startTime.value" id="1mb-kZ-iAq"/>
+                                                <binding destination="-2" name="enabled" keyPath="isEnabled" id="kGz-sm-kTC"/>
                                             </connections>
                                         </textField>
                                         <textField focusRingType="none" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="z7x-Rh-lF3">
@@ -158,8 +158,8 @@
                                                 <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
                                             </textFieldCell>
                                             <connections>
-                                                <binding destination="-2" name="enabled" keyPath="isEnabled" id="HTn-sI-XRC"/>
                                                 <binding destination="-2" name="value" keyPath="connectTime.endTime.value" id="2NM-18-Sad"/>
+                                                <binding destination="-2" name="enabled" keyPath="isEnabled" id="HTn-sI-XRC"/>
                                             </connections>
                                         </textField>
                                     </subviews>

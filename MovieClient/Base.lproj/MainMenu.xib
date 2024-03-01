@@ -12,10 +12,29 @@
         </customObject>
         <customObject id="-1" userLabel="First Responder" customClass="FirstResponder"/>
         <customObject id="-3" userLabel="Application" customClass="NSObject"/>
+        <customObject id="66z-e0-hKc" customClass="MediaWindowController" customModule="MovieClient" customModuleProvider="target">
+            <connections>
+                <outlet property="mediaPlayer" destination="42d-DE-kBG" id="F2R-lJ-thJ"/>
+                <outlet property="movieOptions" destination="VpU-cX-ysq" id="c2L-5h-u7Z"/>
+            </connections>
+        </customObject>
+        <customObject id="42d-DE-kBG" customClass="MediaPlayer" customModule="MovieClient" customModuleProvider="target">
+            <connections>
+                <outlet property="movieOptions" destination="VpU-cX-ysq" id="fXE-Ma-1uT"/>
+            </connections>
+        </customObject>
+        <customObject id="omI-69-NDU" customClass="Connection" customModule="MovieClient" customModuleProvider="target">
+            <connections>
+                <outlet property="mediaController" destination="66z-e0-hKc" id="irO-kt-tbY"/>
+            </connections>
+        </customObject>
         <customObject id="VpU-cX-ysq" customClass="MovieOptionViewController" customModule="MovieClient" customModuleProvider="target"/>
         <customObject id="Ju7-zT-Xmh" customClass="NetworkOptionViewController" customModule="MovieClient" customModuleProvider="target"/>
         <customObject id="Voe-Tx-rLC" customClass="AppDelegate" customModule="MovieClient" customModuleProvider="target">
             <connections>
+                <outlet property="connection" destination="omI-69-NDU" id="1an-I4-cmJ"/>
+                <outlet property="mediaPlayer" destination="42d-DE-kBG" id="ixw-6d-ZFw"/>
+                <outlet property="mediaWindowController" destination="66z-e0-hKc" id="koE-u6-kg4"/>
                 <outlet property="movieHolder" destination="oTI-7L-Sbs" id="61l-HX-Hjf"/>
                 <outlet property="movieOptions" destination="VpU-cX-ysq" id="5Ua-mq-FLd"/>
                 <outlet property="networkHolder" destination="3H8-Fe-PCp" id="b0W-zG-pQI"/>

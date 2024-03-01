@@ -49,7 +49,7 @@
                                     <font key="font" metaFont="system"/>
                                 </buttonCell>
                                 <connections>
-                                    <action selector="selectMovieLocation:" target="-1" id="V7I-tt-vSz"/>
+                                    <action selector="selectMovieLocation:" target="-2" id="owy-JA-RHV"/>
                                     <binding destination="-2" name="enabled" keyPath="isEnabled" id="jzC-QN-7KI"/>
                                 </connections>
                             </button>

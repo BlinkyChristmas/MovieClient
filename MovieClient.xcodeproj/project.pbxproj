@@ -19,6 +19,14 @@
 		568235032B8F8832002F0CE1 /* NetworkOptionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 568235022B8F8832002F0CE1 /* NetworkOptionViewController.swift */; };
 		568235062B8F9C69002F0CE1 /* MovieOptionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 568235052B8F9C69002F0CE1 /* MovieOptionViewController.swift */; };
 		568235082B8F9C98002F0CE1 /* MovieOptionView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 568235072B8F9C98002F0CE1 /* MovieOptionView.xib */; };
+		5682350D2B8FB309002F0CE1 /* Network.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5682350C2B8FB309002F0CE1 /* Network.framework */; };
+		5682350F2B8FB312002F0CE1 /* IOKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5682350E2B8FB312002F0CE1 /* IOKit.framework */; };
+		568235112B90AE73002F0CE1 /* Packet.swift in Sources */ = {isa = PBXBuildFile; fileRef = 568235102B90AE73002F0CE1 /* Packet.swift */; };
+		568235132B90B31D002F0CE1 /* MediaPlayer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 568235122B90B31D002F0CE1 /* MediaPlayer.swift */; };
+		568235152B90EE69002F0CE1 /* MediaWindowController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 568235142B90EE69002F0CE1 /* MediaWindowController.swift */; };
+		568235172B90EE98002F0CE1 /* MediaWindow.xib in Resources */ = {isa = PBXBuildFile; fileRef = 568235162B90EE98002F0CE1 /* MediaWindow.xib */; };
+		568235192B92051A002F0CE1 /* Connection.swift in Sources */ = {isa = PBXBuildFile; fileRef = 568235182B92051A002F0CE1 /* Connection.swift */; };
+		5682351B2B922188002F0CE1 /* Window+extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5682351A2B922188002F0CE1 /* Window+extension.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -36,6 +44,14 @@
 		568235022B8F8832002F0CE1 /* NetworkOptionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkOptionViewController.swift; sourceTree = "<group>"; };
 		568235052B8F9C69002F0CE1 /* MovieOptionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovieOptionViewController.swift; sourceTree = "<group>"; };
 		568235072B8F9C98002F0CE1 /* MovieOptionView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = MovieOptionView.xib; sourceTree = "<group>"; };
+		5682350C2B8FB309002F0CE1 /* Network.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Network.framework; path = System/Library/Frameworks/Network.framework; sourceTree = SDKROOT; };
+		5682350E2B8FB312002F0CE1 /* IOKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = IOKit.framework; path = System/Library/Frameworks/IOKit.framework; sourceTree = SDKROOT; };
+		568235102B90AE73002F0CE1 /* Packet.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Packet.swift; sourceTree = "<group>"; };
+		568235122B90B31D002F0CE1 /* MediaPlayer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MediaPlayer.swift; sourceTree = "<group>"; };
+		568235142B90EE69002F0CE1 /* MediaWindowController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MediaWindowController.swift; sourceTree = "<group>"; };
+		568235162B90EE98002F0CE1 /* MediaWindow.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = MediaWindow.xib; sourceTree = "<group>"; };
+		568235182B92051A002F0CE1 /* Connection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Connection.swift; sourceTree = "<group>"; };
+		5682351A2B922188002F0CE1 /* Window+extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Window+extension.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -43,6 +59,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				5682350D2B8FB309002F0CE1 /* Network.framework in Frameworks */,
+				5682350F2B8FB312002F0CE1 /* IOKit.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -54,6 +72,7 @@
 			children = (
 				568234E52B8F8741002F0CE1 /* MovieClient */,
 				568234E42B8F8741002F0CE1 /* Products */,
+				5682350B2B8FB309002F0CE1 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -95,6 +114,7 @@
 				568234F72B8F87B8002F0CE1 /* BinaryInteger+extension.swift */,
 				568234F82B8F87B8002F0CE1 /* URL+extension.swift */,
 				568234F92B8F87B8002F0CE1 /* Data+extension.swift */,
+				5682351A2B922188002F0CE1 /* Window+extension.swift */,
 			);
 			path = Extension;
 			sourceTree = "<group>";
@@ -104,6 +124,8 @@
 			children = (
 				568235002B8F87FF002F0CE1 /* NetworkOptionView.xib */,
 				568235022B8F8832002F0CE1 /* NetworkOptionViewController.swift */,
+				568235182B92051A002F0CE1 /* Connection.swift */,
+				568235102B90AE73002F0CE1 /* Packet.swift */,
 			);
 			path = Network;
 			sourceTree = "<group>";
@@ -113,8 +135,20 @@
 			children = (
 				568235072B8F9C98002F0CE1 /* MovieOptionView.xib */,
 				568235052B8F9C69002F0CE1 /* MovieOptionViewController.swift */,
+				568235122B90B31D002F0CE1 /* MediaPlayer.swift */,
+				568235142B90EE69002F0CE1 /* MediaWindowController.swift */,
+				568235162B90EE98002F0CE1 /* MediaWindow.xib */,
 			);
 			path = Player;
+			sourceTree = "<group>";
+		};
+		5682350B2B8FB309002F0CE1 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				5682350E2B8FB312002F0CE1 /* IOKit.framework */,
+				5682350C2B8FB309002F0CE1 /* Network.framework */,
+			);
+			name = Frameworks;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -177,6 +211,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				568235082B8F9C98002F0CE1 /* MovieOptionView.xib in Resources */,
+				568235172B90EE98002F0CE1 /* MediaWindow.xib in Resources */,
 				568234E92B8F8743002F0CE1 /* Assets.xcassets in Resources */,
 				568235012B8F87FF002F0CE1 /* NetworkOptionView.xib in Resources */,
 				568234EC2B8F8744002F0CE1 /* MainMenu.xib in Resources */,
@@ -190,13 +225,18 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				568235192B92051A002F0CE1 /* Connection.swift in Sources */,
+				5682351B2B922188002F0CE1 /* Window+extension.swift in Sources */,
 				568235032B8F8832002F0CE1 /* NetworkOptionViewController.swift in Sources */,
 				568234FB2B8F87B8002F0CE1 /* HourMinute.swift in Sources */,
 				568235062B8F9C69002F0CE1 /* MovieOptionViewController.swift in Sources */,
 				568234FA2B8F87B8002F0CE1 /* MyView.swift in Sources */,
 				568234E72B8F8741002F0CE1 /* AppDelegate.swift in Sources */,
+				568235152B90EE69002F0CE1 /* MediaWindowController.swift in Sources */,
 				568234FC2B8F87B8002F0CE1 /* BinaryInteger+extension.swift in Sources */,
+				568235112B90AE73002F0CE1 /* Packet.swift in Sources */,
 				568234FD2B8F87B8002F0CE1 /* URL+extension.swift in Sources */,
+				568235132B90B31D002F0CE1 /* MediaPlayer.swift in Sources */,
 				568234FE2B8F87B8002F0CE1 /* Data+extension.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
