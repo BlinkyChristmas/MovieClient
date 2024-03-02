@@ -15,7 +15,7 @@ class AppDelegate: NSObject, NSApplicationDelegate {
     @IBOutlet var movieOptions : MovieOptionViewController!
     @IBOutlet var mediaWindowController : MediaWindowController!
     @IBOutlet var mediaPlayer : MediaPlayer!
-    
+
     @IBOutlet var networkHolder : MyView!
     @IBOutlet var movieHolder : MyView!
     @IBOutlet var connection: Connection!
@@ -59,6 +59,7 @@ class AppDelegate: NSObject, NSApplicationDelegate {
     
     // ===========================================================================================
     func scheduleStateOnTimer() {
+        Swift.print("Schedule on timer: \(networkOptions.connectTime.getStartInterval())")
         stateTimer = Timer.scheduledTimer(withTimeInterval: networkOptions.connectTime.getStartInterval(), repeats: false, block: { _ in
             // We need to a few things
             self.scheduleStateOffTimer()
@@ -70,6 +71,7 @@ class AppDelegate: NSObject, NSApplicationDelegate {
     }
     // ===========================================================================================
     func scheduleStateOffTimer() {
+        Swift.print("Schedule off timer: \(networkOptions.connectTime.getEndInterval())")
         stateTimer = Timer.scheduledTimer(withTimeInterval: networkOptions.connectTime.getEndInterval(), repeats: false, block: { _ in
             // We need to a few things
             self.mediaWindowController.setShow(state: false)
@@ -137,7 +139,7 @@ class AppDelegate: NSObject, NSApplicationDelegate {
                        self.currentState = "Connecting"
                    }
                    else {
-                       self.currentState = "Waiting for connect time"
+                       self.currentState = "Waiting for connect time: " + self.networkOptions.connectTime.getNextStart()
                    }
                }
            }

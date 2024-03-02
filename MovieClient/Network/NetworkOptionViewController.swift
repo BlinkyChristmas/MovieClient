@@ -17,7 +17,7 @@ class NetworkOptionViewController : NSViewController {
     
     // =======================================================================================================
     func loadFromPreference() -> Void {
-        connectTime.startTime.loadFromPreferenceWithKey(key: "BEGINTIME")
+        connectTime.startTime.loadFromPreferenceWithKey(key: "STARTTIME")
         connectTime.endTime.loadFromPreferenceWithKey(key: "ENDTIME")
         handle = UserDefaults.standard.string(forKey: "CLIENTHANDLE") ?? "Media Client"
         serverPort = UserDefaults.standard.integer(forKey: "SERVERPORT")
@@ -42,4 +42,5 @@ class NetworkOptionViewController : NSViewController {
             (entry as? NSTextField)?.abortEditing()
         }
     }
+    
 }

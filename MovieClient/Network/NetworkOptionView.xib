@@ -110,7 +110,7 @@
                                     </constraints>
                                 </view>
                             </box>
-                            <box title="Time Range" translatesAutoresizingMaskIntoConstraints="NO" id="a4I-Yo-Z58">
+                            <box title="Connect Time Range" translatesAutoresizingMaskIntoConstraints="NO" id="a4I-Yo-Z58">
                                 <rect key="frame" x="13" y="7" width="867" height="81"/>
                                 <view key="contentView" id="LEe-m6-EHD" customClass="MyView" customModule="MovieClient" customModuleProvider="target">
                                     <rect key="frame" x="4" y="5" width="859" height="61"/>

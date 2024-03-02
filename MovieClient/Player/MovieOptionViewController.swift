@@ -11,6 +11,8 @@ class MovieOptionViewController : NSViewController {
     @objc dynamic var projectorSerial = ""
     @objc dynamic var isEnabled = true
     
+    @IBOutlet var comboBox:NSComboBox!
+    
     // =======================================================================================================
     @IBAction func selectMovieLocation(_ sender: Any?) {
         let panel = NSOpenPanel()
@@ -27,6 +29,15 @@ class MovieOptionViewController : NSViewController {
 
     }
     
+    // ======================================================================================================================
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        
+        // Lets populate our combo box!
+        comboBox.removeAllItems()
+        comboBox.addItems(withObjectValues: serialDevices())
+    }
+
     // =======================================================================================================
     func loadFromPreference() -> Void {
         projectorSerial = UserDefaults.standard.string(forKey: "PROJECTORSERIAL") ?? ""

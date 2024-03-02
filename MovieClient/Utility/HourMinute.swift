@@ -22,7 +22,16 @@ class HourMinute : NSObject {
             try! load(newValue)
         }
     }
-    
+    // ===========================================================================================================
+    var dateString:String {
+        let dateFormatter = DateFormatter()
+        dateFormatter.timeZone = .current
+        dateFormatter.dateFormat = "MM/dd/yyyy HH:mm"
+        let tnow = dateFormatter.string(from:self.date)
+        let str = String(tnow)
+
+        return str
+    }
     // ===========================================================================================================
     @objc dynamic var date:Date {
         get{
@@ -171,7 +180,24 @@ class HourMinuteRange : NSObject {
         }
         return interval
     }
-    
+    // =============================================================================================
+    func getNextStart() -> String {
+        if ( Date() < self.startTime.date ) {
+            return self.startTime.dateString
+        }
+        else {
+            var temp = self.startTime.date ;
+            temp = temp.addingTimeInterval(24.0 * 60.0 * 60.0 )
+            let dateFormatter = DateFormatter()
+            dateFormatter.timeZone = .current
+            dateFormatter.dateFormat = "MM/dd/yyyy HH:mm"
+            let tnow = dateFormatter.string(from:temp)
+            let str = String(tnow)
+            return str
+        }
+             
+
+    }
     // =============================================================================================
     func getEndInterval() -> TimeInterval {
         var interval = endTime.intervalFrom(date: Date.now)

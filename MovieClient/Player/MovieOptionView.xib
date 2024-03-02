@@ -7,6 +7,7 @@
     <objects>
         <customObject id="-2" userLabel="File's Owner" customClass="MovieOptionViewController" customModule="MovieClient" customModuleProvider="target">
             <connections>
+                <outlet property="comboBox" destination="9Y3-zi-7nw" id="yNG-sE-njF"/>
                 <outlet property="view" destination="c22-O7-iKe" id="EY3-gT-MDk"/>
             </connections>
         </customObject>
@@ -54,9 +55,9 @@
                                 </connections>
                             </button>
                             <comboBox focusRingType="none" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="9Y3-zi-7nw">
-                                <rect key="frame" x="123" y="18" width="156" height="23"/>
+                                <rect key="frame" x="123" y="18" width="254" height="23"/>
                                 <constraints>
-                                    <constraint firstAttribute="width" constant="152" id="nhC-aP-lmK"/>
+                                    <constraint firstAttribute="width" constant="250" id="nhC-aP-lmK"/>
                                 </constraints>
                                 <comboBoxCell key="cell" scrollable="YES" lineBreakMode="clipping" selectable="YES" editable="YES" sendsActionOnEndEditing="YES" borderStyle="bezel" drawsBackground="YES" completes="NO" numberOfVisibleItems="5" id="mVT-Ug-b8T">
                                     <font key="font" metaFont="system"/>

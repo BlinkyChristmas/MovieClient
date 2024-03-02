@@ -32,10 +32,10 @@ class Connection : NSObject {
         let packetid = data.packetID
         switch (packetid) {
             case NOPPACKET:
-                Swift.print("Process NOP")
+                //Swift.print("Process NOP")
                 let respond = data.nopRespond
                 if (respond) {
-                    Swift.print("Send NOP")
+                    //Swift.print("Send NOP")
                     var newdata = Data(count: NOPPACKETSIZE)
                     newdata.packetLength = Int32(NOPPACKETSIZE)
                     newdata.packetID = NOPPACKET
@@ -43,25 +43,25 @@ class Connection : NSObject {
                 }
                 
             case SYNCPACKET:
-                Swift.print("Process Sync")
+               // Swift.print("Process Sync")
                let frame = data.syncFrame
                 mediaController.sync(frame: frame)
   
                 
             case LOADPACKET:
-                Swift.print("Process Load")
+                //Swift.print("Process Load")
                let moviename = data.movieName
                 mediaController.loadMovie(moviename: moviename)
                  
             case PLAYPACKET:
-                Swift.print("Process Play")
+               // Swift.print("Process Play")
                 let state = data.playState
                 let frame = data.playFrame
                 mediaController.playMovie(state: state, frame: frame)
             
                 
             case SHOWPACKET:
-                Swift.print("Process Show")
+                //Swift.print("Process Show")
                 let state = data.showState
                 mediaController.setShow(state: state)
                 

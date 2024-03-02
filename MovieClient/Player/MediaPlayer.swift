@@ -8,6 +8,9 @@ class MediaPlayer : NSObject {
     var playerLayer:AVPlayerLayer
     var currentFrame : Int32 {
         get {
+            guard player.currentTime().isNumeric else {
+                return 0
+            }
             return Int32( player.currentTime().seconds / 0.037)
         }
     }
@@ -46,10 +49,9 @@ class MediaPlayer : NSObject {
     func stop() {
         player.pause()
     }
+    // ===========================================================================================
     func clear() {
         player.pause()
-        let asset = AVAsset()
-        let item = AVPlayerItem(asset: asset)
-        player.replaceCurrentItem(with: item)
+        player.replaceCurrentItem(with: nil)
     }
 }

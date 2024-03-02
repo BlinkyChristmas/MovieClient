@@ -7,23 +7,28 @@ class MediaWindowController : NSWindowController {
     @IBOutlet weak var mediaPlayer:MediaPlayer!
     @IBOutlet weak var movieOptions:MovieOptionViewController!
     
+    //var screenObserver: Void = NotificationCenter.default.addObserver( MediaWindowController.self, selector: #selector(handleDisplayConnection), object: nil)
+
+
+    
     override var windowNibName: NSNib.Name? {
         return "MediaWindow"
     }
+    
     // =======================================================================================================================
     func setShow(state:Bool) {
         if (state) {
             Swift.print("Bring up Show Window")
             self.showWindow(nil)
             if (!self.window!.isFullscreen) {
-                self.window?.toggleFullScreen(nil)
+                //self.window?.toggleFullScreen(nil)
             }
         }
         else {
             Swift.print("Close Show Window")
 
             if (self.window!.isFullscreen) {
-                self.window?.toggleFullScreen(nil)
+                //self.window?.toggleFullScreen(nil)
             }
             self.window?.close()
             mediaPlayer.clear()
@@ -31,15 +36,44 @@ class MediaWindowController : NSWindowController {
         }
     }
     
+    // =======================================================================================================================
+    deinit {
+        //NotificationCenter.default.removeObserver(screenObserver)
+    }
+    
     // ======================================================================================================================
     override func windowDidLoad() {
         super.windowDidLoad()
-        Swift.print("Window loaded")
+        
         mediaPlayer.playerLayer.frame = self.window!.contentView!.layer!.bounds
         self.window!.contentView!.layer?.addSublayer(mediaPlayer.playerLayer)
-
     }
-    
+
+    // ======================================================================================================================
+    @objc func handleDisplayConnection(notification: Notification) {
+        
+        if (NSScreen.screens.count > 1) {
+            // We have more then one screen, we should be on the second screen
+            if (self.window!.screen == NSScreen.main) {
+                // We need to move this window to the second window
+                    // It is!, we need to move it
+                    let size = NSScreen.screens[1].visibleFrame.size
+                    let origin = NSScreen.screens[1].visibleFrame.origin
+                    self.window!.setFrame(NSRect(origin: origin, size: size), display: self.window!.isVisible )
+            }
+           
+        }
+        else if ( NSScreen.screens.count < 2) {
+            if (self.window!.screen != NSScreen.main) {
+                // We need to move this window to the main window
+                let size = NSScreen.screens[0].visibleFrame.size
+                let origin = NSScreen.screens[0].visibleFrame.origin
+                self.window!.setFrame(NSRect(origin: origin, size: size), display: self.window!.isVisible )
+            }
+
+        }
+    }
+
     // =======================================================================================================================
     func loadMovie(moviename:String) {
 
@@ -74,4 +108,6 @@ class MediaWindowController : NSWindowController {
             mediaPlayer.stop()
         }
     }
+    
+
 }
