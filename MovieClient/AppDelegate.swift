@@ -49,8 +49,10 @@ class AppDelegate: NSObject, NSApplicationDelegate {
             // We should connect
             DispatchQueue.main.async {
                 Swift.print("Attempting connect")
-                self.scheduleReconnectTimer()
-                _ = self.connection.connect(serverIP: self.networkOptions.serverAddress, serverPort: String(self.networkOptions.serverPort))
+                if (self.networkOptions.connectTime.inRange()){
+                    self.scheduleReconnectTimer()
+                    _ = self.connection.connect(serverIP: self.networkOptions.serverAddress, serverPort: String(self.networkOptions.serverPort))
+                }
             }
             
         })
