@@ -77,7 +77,7 @@ class MediaWindowController : NSWindowController {
     // =======================================================================================================================
     func loadMovie(moviename:String) {
 
-        let completename = moviename + ".mov"
+        let completename = moviename + ".mp4"
         guard let url = movieOptions.movieLocation?.appendingPathComponent(completename) else {
             return
         }
