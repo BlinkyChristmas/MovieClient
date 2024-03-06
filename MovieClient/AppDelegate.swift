@@ -66,8 +66,11 @@ class AppDelegate: NSObject, NSApplicationDelegate {
             // We need to a few things
             self.scheduleStateOffTimer()
             // We should connect
-            self.scheduleReconnectTimer()
-            _ = self.connection.connect(serverIP: self.networkOptions.serverAddress, serverPort: String(self.networkOptions.serverPort))
+            if self.networkOptions.connectTime.inRange() {
+                self.scheduleReconnectTimer()
+                _ = self.connection.connect(serverIP: self.networkOptions.serverAddress, serverPort: String(self.networkOptions.serverPort))
+            }
+            
         })
         
     }
