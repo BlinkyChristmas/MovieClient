@@ -43,14 +43,15 @@ class AppDelegate: NSObject, NSApplicationDelegate {
     
     // ============================================================================================
     func scheduleReconnectTimer() {
-        self.connectTimer = Timer.scheduledTimer(withTimeInterval: 90.0, repeats: false, block: { _ in
+        self.connectTimer = Timer.scheduledTimer(withTimeInterval: 30.0, repeats: false, block: { _ in
             self.connectTimer?.invalidate()
             self.connectTimer = nil
             // We should connect
             DispatchQueue.main.async {
-                Swift.print("Attempting connect")
+                //Swift.print("Attempting connect")
                 if (self.networkOptions.connectTime.inRange()){
                     self.scheduleReconnectTimer()
+                
                     _ = self.connection.connect(serverIP: self.networkOptions.serverAddress, serverPort: String(self.networkOptions.serverPort))
                 }
             }
@@ -61,7 +62,7 @@ class AppDelegate: NSObject, NSApplicationDelegate {
     
     // ===========================================================================================
     func scheduleStateOnTimer() {
-        Swift.print("Schedule on timer: \(networkOptions.connectTime.getStartInterval())")
+        //Swift.print("Schedule on timer: \(networkOptions.connectTime.getStartInterval())")
         stateTimer = Timer.scheduledTimer(withTimeInterval: networkOptions.connectTime.getStartInterval(), repeats: false, block: { _ in
             // We need to a few things
             self.scheduleStateOffTimer()
@@ -76,7 +77,7 @@ class AppDelegate: NSObject, NSApplicationDelegate {
     }
     // ===========================================================================================
     func scheduleStateOffTimer() {
-        Swift.print("Schedule off timer: \(networkOptions.connectTime.getEndInterval())")
+        //Swift.print("Schedule off timer: \(networkOptions.connectTime.getEndInterval())")
         stateTimer = Timer.scheduledTimer(withTimeInterval: networkOptions.connectTime.getEndInterval(), repeats: false, block: { _ in
             // We need to a few things
             self.mediaWindowController.setShow(state: false)
@@ -103,15 +104,22 @@ class AppDelegate: NSObject, NSApplicationDelegate {
         
         
         observation = observe(\.connection?.connected, options: .new, changeHandler: { [self] object, change in
-            Swift.print("Network state changed!")
+            //Swift.print("Network state changed!")
             self.updateCurrentState()
             if (self.connection.connected){
                 self.connectTimer?.invalidate() ;
                 self.connectTimer = nil
             }
+            if (!self.connection.connected) {
+                mediaPlayer.clear()
+            }
             if (!self.connection.connected   && self.networkOptions.connectTime.inRange() && self.connectTimer == nil) {
                 DispatchQueue.main.async {
-                    self.scheduleReconnectTimer()
+                    if (self.networkOptions.connectTime.inRange()){
+                        self.scheduleReconnectTimer()
+                        _ = self.connection.connect(serverIP: self.networkOptions.serverAddress, serverPort: String(self.networkOptions.serverPort))
+                    }
+
                 }
             }
             
@@ -180,7 +188,8 @@ class AppDelegate: NSObject, NSApplicationDelegate {
             
             else {
                 // We want to stop any network stuff and timers
-                
+                self.mediaPlayer.clear()
+                mediaWindowController.close()
                 networkOptions.isEnabled = true
                 movieOptions.isEnabled = true
                 connection.stop(error: nil)

@@ -66,7 +66,7 @@ class Connection : NSObject {
                 mediaController.setShow(state: state)
                 
             default:
-                Swift.print("unknown packet to process")
+                //Swift.print("unknown packet to process")
                 break
         }
     }
@@ -85,7 +85,7 @@ class Connection : NSObject {
             // If this happens, we haven't heard from the server
             self.idleTimer?.invalidate()
             self.idleTimer = nil
-            Swift.print("Timer expired, calling stop")
+            //Swift.print("Timer expired, calling stop")
             self.stop(error: nil)
         })
     }
@@ -97,7 +97,7 @@ class Connection : NSObject {
 
     // ==============================================================================================================
     func stop(error: Error?) {
-        Swift.print("In Connection.stop(error:) setting connected to false")
+        //Swift.print("In Connection.stop(error:) setting connected to false")
         self.nwConnection?.cancel()
         self.nwConnection?.stateUpdateHandler = nil
         
@@ -109,7 +109,7 @@ class Connection : NSObject {
     }
     // ==============================================================================================================
     func stop() {
-        Swift.print("In Connection.stop) setting connected to false")
+        //Swift.print("In Connection.stop) setting connected to false")
         self.idleTimer?.invalidate()
         self.idleTimer = nil
         self.nwConnection?.cancel()
@@ -120,13 +120,13 @@ class Connection : NSObject {
     }
     // ===============================================================================================================
     func connectionDidEnd() {
-        Swift.print("In Connection.connectionDidEnd()")
+        //Swift.print("In Connection.connectionDidEnd()")
         self.stop(error:nil)
     }
     
     // ===============================================================================================================
     func connectionDidFail(error:Error) {
-        Swift.print("In Connection.connectionDidFail(error:")
+        //Swift.print("In Connection.connectionDidFail(error:")
         self.stop(error:error)
     }
 
@@ -139,7 +139,7 @@ class Connection : NSObject {
                 if connected != true {
                     connected = true
                     // We need to send out identifiction
-                    Swift.print("Sending handle: \(myHandle)")
+                    //Swift.print("Sending handle: \(myHandle)")
                     _ = self.sendIdentification(handle: myHandle)
                     DispatchQueue.main.async{
                         _ = self.setupRead()
@@ -167,7 +167,7 @@ class Connection : NSObject {
         let tcpOptions = NWProtocolTCP.Options()
         tcpOptions.enableKeepalive = true
         let params = NWParameters(tls: nil, tcp: tcpOptions)
-        Swift.print("Connecting with \(serverIP) : \(serverPort)")
+        //Swift.print("Connecting with \(serverIP) : \(serverPort)")
         nwConnection = NWConnection(host: NWEndpoint.Host(serverIP), port: NWEndpoint.Port(serverPort)!, using: params)
         guard nwConnection != nil else {
             return false
@@ -188,7 +188,7 @@ class Connection : NSObject {
         }
         nwConnection!.send(content: data, completion: .contentProcessed({ error in
             if let error = error {
-                Swift.print("Send failed")
+                //Swift.print("Send failed")
                 self.connectionDidFail(error: error)
                 return
             }
@@ -217,13 +217,13 @@ class Connection : NSObject {
     
         nwConnection!.receive(minimumIncompleteLength: amount, maximumLength: amount) { data, _, isComplete, error in
             if isComplete {
-                Swift.print("Connection ended,  is completed!")
+                //Swift.print("Connection ended,  is completed!")
                 self.connectionDidEnd()
                 
             }
             else if let error = error {
                 // Do something
-                Swift.print("Connect.read had error")
+                //Swift.print("Connect.read had error")
                 self.connectionDidFail(error: error)
             }
             else if let data = data, !data.isEmpty {

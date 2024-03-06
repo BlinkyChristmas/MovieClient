@@ -18,14 +18,14 @@ class MediaWindowController : NSWindowController {
     // =======================================================================================================================
     func setShow(state:Bool) {
         if (state) {
-            Swift.print("Bring up Show Window")
+            //Swift.print("Bring up Show Window")
             self.showWindow(nil)
             if (!self.window!.isFullscreen) {
                 //self.window?.toggleFullScreen(nil)
             }
         }
         else {
-            Swift.print("Close Show Window")
+            //Swift.print("Close Show Window")
 
             if (self.window!.isFullscreen) {
                 //self.window?.toggleFullScreen(nil)
@@ -81,7 +81,7 @@ class MediaWindowController : NSWindowController {
         guard let url = movieOptions.movieLocation?.appendingPathComponent(completename) else {
             return
         }
-        Swift.print("Load movie: \(url.path())")
+        //Swift.print("Load movie: \(url.path())")
 
         mediaPlayer.loadMovie(url: url)
     }
@@ -90,7 +90,7 @@ class MediaWindowController : NSWindowController {
     func sync(frame:Int32) {
         let delta = mediaPlayer.currentFrame - frame
         if  abs(delta) > 6 {
-            Swift.print("Sync movie to frame: \(frame)")
+            //Swift.print("Sync movie to frame: \(frame)")
 
             mediaPlayer.setFrame(frame: frame)
         }
@@ -99,12 +99,12 @@ class MediaWindowController : NSWindowController {
     // =======================================================================================================================
     func playMovie(state:Bool,frame:Int32 = 0) {
         if (state) {
-            Swift.print("Play movie at frame: \(frame)")
+            //Swift.print("Play movie at frame: \(frame)")
             mediaPlayer.setFrame(frame: frame)
             mediaPlayer.play()
         }
         else {
-            Swift.print("Stop movie ")
+            //Swift.print("Stop movie ")
             mediaPlayer.stop()
         }
     }
