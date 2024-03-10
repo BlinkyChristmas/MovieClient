@@ -171,13 +171,12 @@ class HourMinuteRange : NSObject {
     
     // =============================================================================================
     func getStartInterval() -> TimeInterval {
-        if (self.inRange()) {
-            return TimeInterval(0)
-        }
         var interval = startTime.intervalFrom(date: Date.now)
-        if (interval < 0.0) {
-            interval += 24.0 * 60.0 * 60.0
+        if (interval > 0) {
+            return interval
         }
+        interval += 24.0 * 60.0 * 60.0
+
         return interval
     }
     // =============================================================================================
@@ -200,6 +199,7 @@ class HourMinuteRange : NSObject {
     }
     // =============================================================================================
     func getEndInterval() -> TimeInterval {
+        
         var interval = endTime.intervalFrom(date: Date.now)
         if (interval < 0.0) {
             interval += 24.0 * 60.0 * 60.0

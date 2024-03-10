@@ -26,8 +26,9 @@ class AppDelegate: NSObject, NSApplicationDelegate {
     
     var observation: NSKeyValueObservation?
     
-    var stateTimer:Timer? = nil
-    var connectTimer:Timer? = nil
+    var stateOnTimer:Timer? = nil
+    var stateOffTimer:Timer? = nil
+    var reconnectTimer:Timer? = nil
 
     
     // ============================================================================================
@@ -43,9 +44,9 @@ class AppDelegate: NSObject, NSApplicationDelegate {
     
     // ============================================================================================
     func scheduleReconnectTimer() {
-        self.connectTimer = Timer.scheduledTimer(withTimeInterval: 30.0, repeats: false, block: { _ in
-            self.connectTimer?.invalidate()
-            self.connectTimer = nil
+        self.reconnectTimer = Timer.scheduledTimer(withTimeInterval: 30.0, repeats: false, block: { _ in
+            self.reconnectTimer?.invalidate()
+            self.reconnectTimer = nil
             // We should connect
             DispatchQueue.main.async {
                 //Swift.print("Attempting connect")
@@ -62,14 +63,17 @@ class AppDelegate: NSObject, NSApplicationDelegate {
     
     // ===========================================================================================
     func scheduleStateOnTimer() {
-        //Swift.print("Schedule on timer: \(networkOptions.connectTime.getStartInterval())")
-        stateTimer = Timer.scheduledTimer(withTimeInterval: networkOptions.connectTime.getStartInterval(), repeats: false, block: { _ in
+        Swift.print("Schedule on timer: \(networkOptions.connectTime.getStartInterval())")
+        stateOnTimer = Timer.scheduledTimer(withTimeInterval: networkOptions.connectTime.getStartInterval(), repeats: false, block: { _ in
             // We need to a few things
-            self.scheduleStateOffTimer()
             // We should connect
-            if self.networkOptions.connectTime.inRange() {
-                self.scheduleReconnectTimer()
-                _ = self.connection.connect(serverIP: self.networkOptions.serverAddress, serverPort: String(self.networkOptions.serverPort))
+            DispatchQueue.main.async {
+                self.scheduleStateOnTimer()
+
+                if self.networkOptions.connectTime.inRange() {
+                    self.scheduleReconnectTimer()
+                    _ = self.connection.connect(serverIP: self.networkOptions.serverAddress, serverPort: String(self.networkOptions.serverPort))
+                }
             }
             
         })
@@ -77,14 +81,17 @@ class AppDelegate: NSObject, NSApplicationDelegate {
     }
     // ===========================================================================================
     func scheduleStateOffTimer() {
-        //Swift.print("Schedule off timer: \(networkOptions.connectTime.getEndInterval())")
-        stateTimer = Timer.scheduledTimer(withTimeInterval: networkOptions.connectTime.getEndInterval(), repeats: false, block: { _ in
+        Swift.print("Schedule off timer: \(networkOptions.connectTime.getEndInterval())")
+        stateOffTimer = Timer.scheduledTimer(withTimeInterval: networkOptions.connectTime.getEndInterval(), repeats: false, block: { _ in
             // We need to a few things
-            self.mediaWindowController.setShow(state: false)
-            self.connection.stop(error:nil)
-            self.connectTimer?.invalidate()
-            self.connectTimer = nil
-            self.scheduleStateOnTimer()
+            DispatchQueue.main.async {
+                self.mediaWindowController.setShow(state: false)
+                self.connection.stop(error:nil)
+                self.reconnectTimer?.invalidate()
+                self.reconnectTimer = nil
+                self.scheduleStateOffTimer()
+            }
+           
         })
     }
     // ============================================================================================
@@ -107,13 +114,13 @@ class AppDelegate: NSObject, NSApplicationDelegate {
             //Swift.print("Network state changed!")
             self.updateCurrentState()
             if (self.connection.connected){
-                self.connectTimer?.invalidate() ;
-                self.connectTimer = nil
+                self.reconnectTimer?.invalidate() ;
+                self.reconnectTimer = nil
             }
             if (!self.connection.connected) {
                 mediaPlayer.clear()
             }
-            if (!self.connection.connected   && self.networkOptions.connectTime.inRange() && self.connectTimer == nil) {
+            if (!self.connection.connected   && self.networkOptions.connectTime.inRange() && self.reconnectTimer == nil) {
                 DispatchQueue.main.async {
                     if (self.networkOptions.connectTime.inRange()){
                         self.scheduleReconnectTimer()
@@ -175,7 +182,7 @@ class AppDelegate: NSObject, NSApplicationDelegate {
                 movieOptions.isEnabled = false
                 
                 mode = "Stop"
-                
+                scheduleStateOffTimer()
                 if networkOptions.connectTime.inRange() {
                     // We should connect
                     self.scheduleReconnectTimer()
@@ -193,10 +200,12 @@ class AppDelegate: NSObject, NSApplicationDelegate {
                 networkOptions.isEnabled = true
                 movieOptions.isEnabled = true
                 connection.stop(error: nil)
-                connectTimer?.invalidate()
-                connectTimer = nil
-                stateTimer?.invalidate()
-                stateTimer = nil
+                reconnectTimer?.invalidate()
+                reconnectTimer = nil
+                stateOnTimer?.invalidate()
+                stateOnTimer = nil
+                stateOffTimer?.invalidate()
+                stateOffTimer = nil
                 mode = "Start"
             }
             updateCurrentState()
