@@ -7,9 +7,8 @@ class MediaWindowController : NSWindowController {
     @IBOutlet weak var mediaPlayer:MediaPlayer!
     @IBOutlet weak var movieOptions:MovieOptionViewController!
     
-    //var screenObserver: Void = NotificationCenter.default.addObserver( MediaWindowController.self, selector: #selector(handleDisplayConnection), object: nil)
 
-
+    var isObserving:Bool = false
     
     override var windowNibName: NSNib.Name? {
         return "MediaWindow"
@@ -21,24 +20,35 @@ class MediaWindowController : NSWindowController {
             //Swift.print("Bring up Show Window")
             self.showWindow(nil)
             if (!self.window!.isFullscreen) {
-                //self.window?.toggleFullScreen(nil)
+                self.window?.toggleFullScreen(nil)
             }
         }
         else {
-            //Swift.print("Close Show Window")
-
-            if (self.window!.isFullscreen) {
-                //self.window?.toggleFullScreen(nil)
+            
+            if (NSScreen.screens.count < 2) {
+                self.window?.close()
             }
-            self.window?.close()
             mediaPlayer.clear()
             
         }
     }
+    // =====================================================================================
+    func setupNotificationCenter() {
+        NotificationCenter.default.addObserver(
+            self,
+            selector: #selector(handleDisplayConnection),
+            name: NSApplication.didChangeScreenParametersNotification,
+            object: nil)
+        isObserving = true
+    }
+
+
     
     // =======================================================================================================================
     deinit {
-        //NotificationCenter.default.removeObserver(screenObserver)
+        if (isObserving) {
+            NotificationCenter.default.removeObserver(self)
+        }
     }
     
     // ======================================================================================================================
@@ -56,10 +66,14 @@ class MediaWindowController : NSWindowController {
             // We have more then one screen, we should be on the second screen
             if (self.window!.screen == NSScreen.main) {
                 // We need to move this window to the second window
-                    // It is!, we need to move it
-                    let size = NSScreen.screens[1].visibleFrame.size
-                    let origin = NSScreen.screens[1].visibleFrame.origin
-                    self.window!.setFrame(NSRect(origin: origin, size: size), display: self.window!.isVisible )
+                // It is!, we need to move it
+                let size = NSScreen.screens[1].visibleFrame.size
+                let origin = NSScreen.screens[1].visibleFrame.origin
+                self.window!.setFrame(NSRect(origin: origin, size: size), display: self.window!.isVisible )
+                if (!self.window!.isFullscreen) {
+                    self.window?.toggleFullScreen(nil)
+                }
+                
             }
            
         }
@@ -69,6 +83,10 @@ class MediaWindowController : NSWindowController {
                 let size = NSScreen.screens[0].visibleFrame.size
                 let origin = NSScreen.screens[0].visibleFrame.origin
                 self.window!.setFrame(NSRect(origin: origin, size: size), display: self.window!.isVisible )
+                if (self.window!.isFullscreen) {
+                    self.window?.toggleFullScreen(nil)
+                }
+
             }
 
         }
