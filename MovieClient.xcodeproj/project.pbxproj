@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		561D58062B9E093100B7E1C6 /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 561D58052B9E093100B7E1C6 /* AVFoundation.framework */; };
+		561D58082B9E093900B7E1C6 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 561D58072B9E093900B7E1C6 /* QuartzCore.framework */; };
 		568234E72B8F8741002F0CE1 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 568234E62B8F8741002F0CE1 /* AppDelegate.swift */; };
 		568234E92B8F8743002F0CE1 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 568234E82B8F8743002F0CE1 /* Assets.xcassets */; };
 		568234EC2B8F8744002F0CE1 /* MainMenu.xib in Resources */ = {isa = PBXBuildFile; fileRef = 568234EA2B8F8744002F0CE1 /* MainMenu.xib */; };
@@ -31,6 +33,8 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		561D58052B9E093100B7E1C6 /* AVFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AVFoundation.framework; path = System/Library/Frameworks/AVFoundation.framework; sourceTree = SDKROOT; };
+		561D58072B9E093900B7E1C6 /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
 		568234E32B8F8741002F0CE1 /* MovieClient.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MovieClient.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		568234E62B8F8741002F0CE1 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		568234E82B8F8743002F0CE1 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -61,8 +65,10 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				561D58082B9E093900B7E1C6 /* QuartzCore.framework in Frameworks */,
 				5682350D2B8FB309002F0CE1 /* Network.framework in Frameworks */,
 				5682350F2B8FB312002F0CE1 /* IOKit.framework in Frameworks */,
+				561D58062B9E093100B7E1C6 /* AVFoundation.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -148,6 +154,8 @@
 		5682350B2B8FB309002F0CE1 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				561D58072B9E093900B7E1C6 /* QuartzCore.framework */,
+				561D58052B9E093100B7E1C6 /* AVFoundation.framework */,
 				5682350E2B8FB312002F0CE1 /* IOKit.framework */,
 				5682350C2B8FB309002F0CE1 /* Network.framework */,
 			);
