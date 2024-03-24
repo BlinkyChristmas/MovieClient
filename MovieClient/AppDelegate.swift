@@ -28,7 +28,6 @@ class AppDelegate: NSObject, NSApplicationDelegate {
     
     var stateOnTimer:Timer? = nil
     var stateOffTimer:Timer? = nil
-    var reconnectTimer:Timer? = nil
 
     
     // ============================================================================================
@@ -42,65 +41,36 @@ class AppDelegate: NSObject, NSApplicationDelegate {
         return true ;
     }
     
-    // ============================================================================================
-    func scheduleReconnectTimer() {
-        self.reconnectTimer = Timer.scheduledTimer(withTimeInterval: 30.0, repeats: false, block: { _ in
-            self.reconnectTimer?.invalidate()
-            self.reconnectTimer = nil
-            // We should connect
-            DispatchQueue.main.async {
-                //Swift.print("Attempting connect")
-                if (self.networkOptions.connectTime.inRange()){
-                    self.scheduleReconnectTimer()
-                
-                    _ = self.connection.connect(serverIP: self.networkOptions.serverAddress, serverPort: String(self.networkOptions.serverPort))
-                }
-            }
-            
-        })
-
-    }
     
     // ===========================================================================================
     func scheduleStateOnTimer() {
-        Swift.print("Schedule on timer: \(networkOptions.connectTime.getStartInterval())")
-        stateOnTimer = Timer.scheduledTimer(withTimeInterval: networkOptions.connectTime.getStartInterval(), repeats: false, block: { _ in
+        stateOnTimer = Timer.scheduledTimer(withTimeInterval: 30.0, repeats: true, block: { _ in
             // We need to a few things
             // We should connect
             DispatchQueue.main.async {
-                self.scheduleStateOnTimer()
-
-                if self.networkOptions.connectTime.inRange() {
-                    self.scheduleReconnectTimer()
+                if self.networkOptions.connectTime.inRange(), !self.connection.connected {
+                    
                     _ = self.connection.connect(serverIP: self.networkOptions.serverAddress, serverPort: String(self.networkOptions.serverPort))
                 }
             }
-            
-        })
+         })
         
     }
     // ===========================================================================================
     func scheduleStateOffTimer() {
-        Swift.print("Schedule off timer: \(networkOptions.connectTime.getEndInterval())")
-        stateOffTimer = Timer.scheduledTimer(withTimeInterval: networkOptions.connectTime.getEndInterval(), repeats: false, block: { _ in
+        stateOffTimer = Timer.scheduledTimer(withTimeInterval: 30.0, repeats: true, block: { _ in
             // We need to a few things
             DispatchQueue.main.async {
-                self.mediaWindowController.setShow(state: false)
-                self.connection.stop(error:nil)
-                self.reconnectTimer?.invalidate()
-                self.reconnectTimer = nil
-                self.scheduleStateOffTimer()
+                if !self.networkOptions.connectTime.inRange(), self.connection.connected {
+                    self.mediaWindowController.setShow(state: false)
+                    
+                    self.connection.stop(error:nil)
+                }
             }
-           
         })
     }
     // ============================================================================================
     func applicationDidFinishLaunching(_ aNotification: Notification) {
-        /*
-        for entry in serialDevices() {
-            Swift.print("Device: \(entry)")
-        }
-        */
         networkOptions.loadFromPreference()
         networkOptions.view.frame = self.networkHolder.bounds
         self.networkHolder.addSubview(networkOptions.view)
@@ -112,25 +82,12 @@ class AppDelegate: NSObject, NSApplicationDelegate {
         
         observation = observe(\.connection?.connected, options: .new, changeHandler: { [self] object, change in
             //Swift.print("Network state changed!")
-            self.updateCurrentState()
-            if (self.connection.connected){
-                self.reconnectTimer?.invalidate() ;
-                self.reconnectTimer = nil
-            }
             if (!self.connection.connected) {
                 mediaPlayer.clear()
             }
-            if (!self.connection.connected   && self.networkOptions.connectTime.inRange() && self.reconnectTimer == nil) {
-                DispatchQueue.main.async {
-                    if (self.networkOptions.connectTime.inRange()){
-                        self.scheduleReconnectTimer()
-                        _ = self.connection.connect(serverIP: self.networkOptions.serverAddress, serverPort: String(self.networkOptions.serverPort))
-                    }
-
-                }
-            }
+            self.updateCurrentState() 
+         })
             
-        })
 
     }
     // ============================================================================================
@@ -183,13 +140,10 @@ class AppDelegate: NSObject, NSApplicationDelegate {
                 
                 mode = "Stop"
                 scheduleStateOffTimer()
+                scheduleStateOnTimer()
                 if networkOptions.connectTime.inRange() {
                     // We should connect
-                    self.scheduleReconnectTimer()
                     _ = connection.connect(serverIP: networkOptions.serverAddress, serverPort: String(networkOptions.serverPort))
-                }
-                else {
-                    scheduleStateOnTimer()
                 }
             }
             
@@ -200,8 +154,6 @@ class AppDelegate: NSObject, NSApplicationDelegate {
                 networkOptions.isEnabled = true
                 movieOptions.isEnabled = true
                 connection.stop(error: nil)
-                reconnectTimer?.invalidate()
-                reconnectTimer = nil
                 stateOnTimer?.invalidate()
                 stateOnTimer = nil
                 stateOffTimer?.invalidate()

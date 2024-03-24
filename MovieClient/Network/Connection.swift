@@ -30,6 +30,7 @@ class Connection : NSObject {
     // ================================================================================================================
     func processPacket(data:Data) {
         let packetid = data.packetID
+        //Swift.print("Packet came in with id: \(data.packetID)")
         switch (packetid) {
             case NOPPACKET:
                 //Swift.print("Process NOP")
@@ -49,7 +50,7 @@ class Connection : NSObject {
   
                 
             case LOADPACKET:
-                //Swift.print("Process Load")
+               
                let moviename = data.movieName
                 mediaController.loadMovie(moviename: moviename)
                  
@@ -142,6 +143,7 @@ class Connection : NSObject {
                     //Swift.print("Sending handle: \(myHandle)")
                     _ = self.sendIdentification(handle: myHandle)
                     DispatchQueue.main.async{
+                        Swift.print("Setting up read")
                         _ = self.setupRead()
                     }
                 }

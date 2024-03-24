@@ -20,7 +20,7 @@ class MediaWindowController : NSWindowController {
             //Swift.print("Bring up Show Window")
             self.showWindow(nil)
             if (!self.window!.isFullscreen) {
-                self.window?.toggleFullScreen(nil)
+                //self.window?.toggleFullScreen(nil)
             }
         }
         else {
