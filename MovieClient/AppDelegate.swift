@@ -41,33 +41,36 @@ class AppDelegate: NSObject, NSApplicationDelegate {
         return true ;
     }
     
-    
-    // ===========================================================================================
-    func scheduleStateOnTimer() {
-        stateOnTimer = Timer.scheduledTimer(withTimeInterval: 30.0, repeats: true, block: { _ in
-            // We need to a few things
-            // We should connect
-            DispatchQueue.main.async {
-                if self.networkOptions.connectTime.inRange(), !self.connection.connected {
-                    
-                    _ = self.connection.connect(serverIP: self.networkOptions.serverAddress, serverPort: String(self.networkOptions.serverPort))
-                }
+    @objc func stateOnFired(timer:Timer) {
+        DispatchQueue.main.async {
+            if self.networkOptions.connectTime.inRange(), !self.connection.connected {
+                
+                _ = self.connection.connect(serverIP: self.networkOptions.serverAddress, serverPort: String(self.networkOptions.serverPort))
             }
-         })
-        
+        }
+
     }
     // ===========================================================================================
-    func scheduleStateOffTimer() {
-        stateOffTimer = Timer.scheduledTimer(withTimeInterval: 30.0, repeats: true, block: { _ in
-            // We need to a few things
-            DispatchQueue.main.async {
-                if !self.networkOptions.connectTime.inRange(), self.connection.connected {
-                    self.mediaWindowController.setShow(state: false)
-                    
-                    self.connection.stop(error:nil)
-                }
+    func scheduleStateOnTimer() {
+        stateOnTimer = Timer(timeInterval: 30.0, target: self, selector: #selector(stateOnFired), userInfo: nil, repeats: true)
+        RunLoop.current.add(stateOnTimer!, forMode: .common)
+        
+    }
+    
+    @objc func stateOffFired(timer:Timer) {
+        DispatchQueue.main.async {
+            if !self.networkOptions.connectTime.inRange(), self.connection.connected {
+                self.mediaWindowController.setShow(state: false)
+                
+                self.connection.stop(error:nil)
             }
-        })
+        }
+    }
+
+    // ===========================================================================================
+    func scheduleStateOffTimer() {
+        stateOffTimer = Timer(timeInterval: 30.0, target: self, selector: #selector(stateOffFired), userInfo: nil, repeats: true)
+        RunLoop.current.add(stateOffTimer!, forMode: .common)
     }
     // ============================================================================================
     func applicationDidFinishLaunching(_ aNotification: Notification) {

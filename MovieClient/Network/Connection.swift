@@ -76,19 +76,19 @@ class Connection : NSObject {
     // Timer related items
     // =============================================================================================================
 
+    @objc func idleFired(timer:Timer) {
+        // If this happens, we haven't heard from the server
+        self.idleTimer?.invalidate()
+        self.idleTimer = nil
+        //Swift.print("Timer expired, calling stop")
+        self.stop(error: nil)
+
+    }
     // ===============================================================================================================
     func scheduleTimer() {
         self.idleTimer?.invalidate()
-        self.idleTimer = nil
-        
-        self.idleTimer = Timer.scheduledTimer(withTimeInterval: 90.0, repeats: false, block: { _ in
-            
-            // If this happens, we haven't heard from the server
-            self.idleTimer?.invalidate()
-            self.idleTimer = nil
-            //Swift.print("Timer expired, calling stop")
-            self.stop(error: nil)
-        })
+        self.idleTimer = Timer(timeInterval: 90.0, target: self, selector: #selector(idleFired), userInfo: nil, repeats: false)
+        RunLoop.current.add(idleTimer!, forMode: .common)
     }
 
     
