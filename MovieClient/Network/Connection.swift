@@ -143,7 +143,7 @@ class Connection : NSObject {
                     //Swift.print("Sending handle: \(myHandle)")
                     _ = self.sendIdentification(handle: myHandle)
                     DispatchQueue.main.async{
-                        Swift.print("Setting up read")
+                        //Swift.print("Setting up read")
                         _ = self.setupRead()
                     }
                 }
